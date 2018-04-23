@@ -85,7 +85,7 @@ ___
     * ```wobbly```
     * ```stiff```
 * ### overflow ```Boolean```
-    Setting this property to true will make the text appear clipped while the transition happens (takes less area), it will simply set overflow to hidden on the animation wrapper.
+    The default value ```false``` will make the text appear clipped while the transition happens (takes less area), it will simply set overflow to hidden on the animation wrapper, set to ```true``` if you want the text to overflow.
 * ### className ```String```
     Any css classes that you might want to provide to the wrapper.
 * ### style ```Object```
