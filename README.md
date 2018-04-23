@@ -1,5 +1,6 @@
 # React-Text-transition
 Animate your text changes
+![text-transition](https://raw.githubusercontent.com/WinterCore/react-text-transition/master/example-gifs/example.gif)
 ## Installation
 ```npm install react-text-transition```
 ## How to use
