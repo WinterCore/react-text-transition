@@ -1,5 +1,6 @@
 # React-Text-transition
 Animate your text changes
+![text-transition](https://raw.githubusercontent.com/WinterCore/react-text-transition/master/example-gifs/example.gif)
 ## Installation
 ```npm install react-text-transition```
 ## How to use
@@ -82,9 +83,9 @@ ___
     * ```stiff```
 * #### overflow ```Boolean```
     Setting this property to true will make the text appear clipped while the transition happens (takes less area), it will simply set overflow to hidden on the animation wrapper.
-* #### className
+* #### className ```String```
     Any css classes that you might want to provide to the wrapper.
-* #### style
+* #### style ```Object```
     Any css styles that you might want to provide to the wrapper.
 
 ## TODO
