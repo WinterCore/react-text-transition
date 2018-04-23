@@ -14,9 +14,8 @@ class TextTransition extends PureComponent {
 	constructor(props) {
 		super();
 		this.state = {
-			texts  : newText(props.text),
-			width  : 0,
-			height : "auto"
+			texts : newText(props.text),
+			width : 0
 		};
 
 		this.timeout       = 0;
@@ -74,7 +73,7 @@ class TextTransition extends PureComponent {
 					display    : this.props.inline ? "inline-block" : "block",
 					width      : width || "100%",
 					whiteSpace : this.props.inline ? "nowrap" : "normal",
-					height     : this.state.height,
+					height     : this.props.inline ? "auto" : "100%",
 					...this.props.style
 				}}
 			>
