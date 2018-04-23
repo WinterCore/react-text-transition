@@ -1,6 +1,9 @@
 # React-Text-transition
-Animate your text changes
+### Animate your text changes
+
 ![text-transition](https://raw.githubusercontent.com/WinterCore/react-text-transition/master/example-gifs/example.gif)
+
+[![Edit r03264p26n](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/r03264p26n?view=preview)
 ## Installation
 ```npm install react-text-transition```
 ## How to use
@@ -53,18 +56,18 @@ class App extends Component {
 ___
 
 ### Detailed Props
-* #### text ```String```
-    Changing this prop is what triggers the transition animation.
-* #### order ```Number```
+* ### text ```String```
+    Changing this prop triggers the transition.
+* ### order ```Number```
     Used to determine the direction from which the new text is shown.
     if the order of the new text is bigger than the one before it, the transition will be **bottom-to-top**,
     this is the default transition it'll be used if no ```order``` prop was provided,
     and the opposite happens if the order of the new text is less than the one before it, aka **top-to-bottom**.
-* #### inline ```Boolean```
+* ### inline ```Boolean```
     Will simply make the wrapper an inline element and animate its width based on currently showing text, this is useful if you want to show some other static text on the same line.
-* #### delay ```Number```
+* ### delay ```Number```
     The amount of miliseconds to wait before transitioning.
-* #### spring ```Object```
+* ### spring ```Object```
     React-Motion's [Spring configuration](https://github.com/chenglou/react-motion#helpers), you can also use the [Spring Parameters Chooser](http://chenglou.github.io/react-motion/demos/demo5-spring-parameters-chooser) to help you pick your preferred spring config.
     React-Motion's spring presets for ```{stiffness, damping}``` are provided with the plugin.
     ```javascript
@@ -81,11 +84,11 @@ ___
     * ```gentle```
     * ```wobbly```
     * ```stiff```
-* #### overflow ```Boolean```
+* ### overflow ```Boolean```
     Setting this property to true will make the text appear clipped while the transition happens (takes less area), it will simply set overflow to hidden on the animation wrapper.
-* #### className ```String```
+* ### className ```String```
     Any css classes that you might want to provide to the wrapper.
-* #### style ```Object```
+* ### style ```Object```
     Any css styles that you might want to provide to the wrapper.
 
 ## TODO
