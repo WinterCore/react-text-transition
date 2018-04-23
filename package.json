@@ -52,5 +52,8 @@
   },
   "peerDependencies": {
     "react": "^15.0.1"
-  }
+  },
+  "files" : [
+    "dist"
+  ]
 }
