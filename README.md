@@ -25,7 +25,7 @@ class App extends Component {
 
   componentDidMount() {
     setInterval(() => {
-      this.setState({ active : this.state.active++ });
+      this.setState({ active : this.state.active + 1 });
     }, 5000);
   }
 
@@ -56,44 +56,41 @@ class App extends Component {
 ___
 
 ### Detailed Props
-* ### text ```String```
-    Changing this prop triggers the transition.
-* ### order ```Number```
-    Used to determine the direction from which the new text is shown.
-    if the order of the new text is bigger than the one before it, the transition will be **bottom-to-top**,
-    this is the default transition it'll be used if no ```order``` prop was provided,
-    and the opposite happens if the order of the new text is less than the one before it, aka **top-to-bottom**.
-* ### inline ```Boolean```
-    Will simply make the wrapper an inline element and animate its width based on currently showing text, this is useful if you want to show some other static text on the same line.
-* ### delay ```Number```
-    The amount of miliseconds to wait before transitioning.
-* ### spring ```Object```
-    React-Motion's [Spring configuration](https://github.com/chenglou/react-motion#helpers), you can also use the [Spring Parameters Chooser](http://chenglou.github.io/react-motion/demos/demo5-spring-parameters-chooser) to help you pick your preferred spring config.
-    React-Motion's spring presets for ```{stiffness, damping}``` are provided with the plugin.
-    ```javascript
-      import TextTransition, { presets } from "react-text-transition";
+#### text ```String```
+Changing this prop triggers the transition.
+#### order ```Number```
+Used to determine the direction from which the new text is shown.
+if the order of the new text is bigger than the one before it, the transition will be **bottom-to-top**,
+this is the default transition it'll be used if no ```order``` prop was provided,
+and the opposite happens if the order of the new text is less than the one before it, aka **top-to-bottom**.
+#### inline ```Boolean```
+Will simply make the wrapper an inline element and animate its width based on currently showing text, this is useful if you want to show some other static text on the same line.
+#### delay ```Number```
+The amount of miliseconds to wait before transitioning.
+#### spring ```Object```
+React-Motion's [Spring configuration](https://github.com/chenglou/react-motion#helpers), you can also use the [Spring Parameters Chooser](http://chenglou.github.io/react-motion/demos/demo5-spring-parameters-chooser) to help you pick your preferred spring config.
+React-Motion's spring presets for ```{stiffness, damping}``` are provided with the plugin.
+```javascript
+  import TextTransition, { presets } from "react-text-transition";
 
-      // in your render method
-      <TextTransition
-        text={ this.state.text }
-        spring={ presets.wobbly }
-      />
-    ```
-    There're 4 presets
-    * ```noWobble``` The default.
-    * ```gentle```
-    * ```wobbly```
-    * ```stiff```
-* ### overflow ```Boolean```
-    The default value ```false``` will make the text appear clipped while the transition happens (takes less area), it will simply set overflow to hidden on the animation wrapper, set to ```true``` if you want the text to overflow.
-* ### className ```String```
-    Any css classes that you might want to provide to the wrapper.
-* ### style ```Object```
-    Any css styles that you might want to provide to the wrapper.
+  // in your render method
+  <TextTransition
+    text={ this.state.text }
+    spring={ presets.wobbly }
+  />
+```
+There're 4 presets
+* ```noWobble``` The default.
+* ```gentle```
+* ```wobbly```
+* ```stiff```
+#### overflow ```Boolean```
+The default value ```false``` will make the text appear clipped while the transition happens (takes less area), it will simply set overflow to hidden on the animation wrapper, set to ```true``` if you want the text to overflow.
+#### className ```String```
+Any css classes that you might want to provide to the wrapper.
+#### style ```Object```
+Any css styles that you might want to provide to the wrapper.
 
-## TODO
-  Add demos everywhere (for each one of the props).
-  Improve the documentation.
 ## NOTE
-  Feel free to ask any questions about using this plugin.
-  This plugin requires [react](https://www.npmjs.com/package/react) to be installed.
+Feel free to ask any questions about using this plugin.
+This plugin requires [react](https://www.npmjs.com/package/react).
