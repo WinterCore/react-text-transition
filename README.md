@@ -49,7 +49,7 @@ class App extends Component {
 | inline | Boolean | false | Makes the wrapper inline (will auto resize based on contents). |
 | delay | Number | 0 | Delay the transition of the text (in milliseconds). |
 | spring | Object | { stiffness : 170, damping : 26 } | React-Motion's spring configuration. |
-| overflow | Boolean | false | Sets css's overflow property to hidden on the wrapper. |
+| overflow | Boolean | false | Setting this to false will make the transitioning text appear clipped (Will simply set overflow : hidden on the wrapper). |
 | className | String | "" | Any css classes that you might want to send to the wrapper. |
 | style | Object | {} | Any styles that you might want to send to the wrapper. |
 
