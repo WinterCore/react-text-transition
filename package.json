@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack --progress --mode production",
-    "dev": "webpack --watch --progress --mode development",
+    "dev": "webpack-dev-server --watch --progress --mode development --hot --config demos/webpack.config.js",
     "lint": "eslint src/ --ext .js"
   },
   "repository": {
@@ -27,13 +27,13 @@
   },
   "homepage": "https://github.com/WinterCore/react-text-transition#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
@@ -43,12 +43,16 @@
     "eslint-plugin-react": "^7.7.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
+    "react-dom": "^16.8.5",
+    "react-hot-loader": "^4.3.12",
     "react-motion": "^0.5.2",
     "style-loader": "^0.21.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "webpack": "^4.6.0",
-    "webpack-cli": "^2.0.15"
+    "webpack-build-notifier": "^0.1.29",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.7"
   },
   "dependencies": {
     "react-motion": "^0.5.2"

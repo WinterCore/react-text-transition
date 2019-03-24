@@ -1,7 +1,10 @@
 {
-	"presets": [
-		"env",
-		"stage-0",
-		"react"
-	]
+  "presets": [
+    "@babel/preset-react",
+    [ "@babel/preset-env", { "targets": { "browsers": ["last 20 versions"] } } ]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread",
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
+  ]
 }
