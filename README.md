@@ -6,6 +6,8 @@
 [![Edit r03264p26n](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/r03264p26n?view=preview)
 ## Installation
 ```npm install react-text-transition```
+## Using the demo
+```npm run dev```
 ## How to use
 
 ### Example
