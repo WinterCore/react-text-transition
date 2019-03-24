@@ -25,7 +25,7 @@ class Demo extends Component {
 	textInterval = 0;
 
 	componentDidMount() {
-		this.textInterval = setInterval(() => this.setState({ index : this.state.index + 1 }), 200);
+		this.textInterval = setInterval(() => this.setState({ index : this.state.index + 1 }), 3000);
 	}
 
 	componentWillUnmount() {
@@ -42,7 +42,7 @@ class Demo extends Component {
 							className="transition-text"
 							overflow
 							inline
-						/> What is this
+						/> is awesome
 					</div>
 				</div>
 			</Fragment>
