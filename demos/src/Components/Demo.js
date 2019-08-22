@@ -1,10 +1,7 @@
-import React, {
-	Component,
-	Fragment
-}              from "react";
+import React   from "react";
 import { hot } from "react-hot-loader";
 
-import TextTransition from "../../../src/components/TextTransition";
+import TextTransition, { presets } from "../../../src";
 
 const WORDS = [
 	"React",
@@ -17,37 +14,45 @@ const WORDS = [
 	"ESLint"
 ];
 
-class Demo extends Component {
-	state = {
-		index : 0
-	};
+const Demo = () => {
+	const [number, setNumber]       = React.useState(0);
+	const [oldNumber, setOldNumber] = React.useState(0);
+	const [index, setIndex]         = React.useState(0);
 
-	textInterval = 0;
+	React.useEffect(() => {
+		const intervalId = setInterval(() => {
+			setNumber((oNumber) => {
+				setOldNumber(oNumber);
+				return Math.round(Math.random() * 100000);
+			});
+			setIndex((i) => i + 1);
+		}, 2000);
+		return () => clearInterval(intervalId);
+	}, []);
 
-	componentDidMount() {
-		this.textInterval = setInterval(() => this.setState({ index : this.state.index + 1 }), 3000);
-	}
-
-	componentWillUnmount() {
-		clearInterval(this.textInterval);
-	}
-
-	render() {
-		return (
-			<Fragment>
-				<div className="center">
-					<div>
-						<TextTransition
-							text={ WORDS[this.state.index % WORDS.length] }
-							className="transition-text"
-							overflow
-							inline
-						/> is awesome
-					</div>
-				</div>
-			</Fragment>
-		);
-	}
-}
+	return (
+		<div className="center">
+			<div>
+				<TextTransition
+					inline
+					text={ WORDS[index % WORDS.length] }
+					className="transition-text"
+					springConfig={ presets.wobbly }
+				/>
+				&nbsp;is awesome
+			</div>
+			<p />
+			<p />
+			<TextTransition
+				inline
+				text={ number }
+				className="transition-text"
+				delay={ 100 }
+				direction={ number > oldNumber ? "up" : "down" }
+				springConfig={ presets.stiff }
+			/>
+		</div>
+	);
+};
 
 export default hot(module)(Demo);

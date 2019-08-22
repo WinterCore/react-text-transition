@@ -21,11 +21,31 @@ module.exports = {
 			{
 				test    : /\.jsx?$/,
 				exclude : /node_modules/,
-				use     : "babel-loader"
+				loader  : "babel-loader",
+				options : {
+					presets : [
+						"@babel/preset-react",
+						[
+							"@babel/preset-env",
+							{
+								targets : {
+									browsers : [
+										">0.2%",
+										"not dead",
+										"not ie <= 11",
+										"not op_mini all"
+									]
+								},
+								modules : false
+							}
+						]
+					],
+					plugins : ["@babel/plugin-proposal-object-rest-spread"]
+				}
 			}, {
 				test    : /\.styl$/,
 				exclude : /node_modules/,
-				use     : ["style-loader", "css-loader", "stylus-loader"]
+				loader  : ["style-loader", "css-loader", "stylus-loader"]
 			}
 		]
 	},

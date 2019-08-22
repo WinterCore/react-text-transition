@@ -1,152 +1,79 @@
-import React, { PureComponent }     from "react";
-import PropTypes                    from "prop-types";
-import {
-	TransitionMotion,
-	Motion,
-	spring
-}                                   from "react-motion";
+import React     from "react";
+import PropTypes from "prop-types";
+
+import { useSpring, useTransition, animated, config } from "react-spring";
 
 import "./text-transition.styl";
 
-const newText = text => [{ key : `${Date.now()}`, style : { opacity : 1, top : 0 }, data : text }];
 
-class TextTransition extends PureComponent {
-	constructor(props) {
-		super();
-		this.state = {
-			texts : newText(props.text),
-			width : 0
-		};
-
-		this.timeout       = 0;
-		this.initialRender = true;
-
-		this.willLeave     = this.willLeave.bind(this);
-		this.willEnter     = this.willEnter.bind(this);
-
-		this.renderStuff   = this.renderStuff.bind(this);
-	}
-
-	componentDidMount() {
-		this.setWidth(this.props.text);
-	}
-
-	componentWillReceiveProps({ order, text }) {
-		if (text !== this.props.text) {
-			this.direction = order < this.props.order;
-			this.timeout = setTimeout(() => {
-				this.setWidth(text);
-				this.setState({ texts : newText(text) });
-			}, this.props.delay);
-		}
-	}
-
-	componentWillUnmount() {
-		clearTimeout(this.timeout);
-	}
-
-	setWidth(text) {
-		this.placeholder.innerHTML = text;
-		if (this.props.inline) this.setState({ width : this.placeholder.offsetWidth });
-	}
-
-	willLeave() {
-		return {
-			opacity : spring(0, this.props.spring),
-			top     : spring(this.direction ? 70 : -70, this.props.spring)
-		};
-	}
-
-	willEnter() {
-		return {
-			opacity : 0,
-			top     : this.direction ? -70 : 70
-		};
-	}
+const newText = (text) => ({ key : `${Date.now()}`, data : text });
 
 
-	renderStuff({ width } = {}) {
-		return (
-			<span
-				className={ `text-transition ${this.props.className}` }
-				style={{
-					display    : this.props.inline ? "inline-block" : "block",
-					width      : width || "100%",
-					whiteSpace : this.props.inline ? "nowrap" : "normal",
-					height     : this.props.inline ? "auto" : "100%",
-					...this.props.style
-				}}
-			>
-				<span ref={ (elem) => { this.placeholder = elem; } } className="placeholder" />
-				<TransitionMotion
-					willLeave={ this.willLeave }
-					willEnter={ this.willEnter }
-					styles={
-						this.state.texts.map(item => ({
-							...item,
-							style : {
-								opacity : spring(item.style.opacity, this.props.spring),
-								top     : spring(item.style.top, this.props.spring)
-							}
-						}))
-					}
-				>
-					{interpolated => (
-						<div
-							className="text-transition-inner"
-							style={{ overflow : this.props.overflow ? "visible" : "hidden" }}
-						>
-							{interpolated.map(config => (
-								<div
-									className="text"
-									key={ config.key }
-									style={{
-										opacity : config.style.opacity,
-										top     : `${config.style.top}%`
-									}}
-								>
-									{ config.data }
-								</div>
-							))}
-						</div>
-					)}
-				</TransitionMotion>
-			</span>
+const TextTransition = ({
+	text,
+	direction,
+	inline,
+	delay,
+	className,
+	style,
+	noOverflow,
+	springConfig
+}) => {
+	const placeholderRef              = React.useRef(null);
+	const [content, setContent]       = React.useState(() => newText(""));
+	const [timeoutId, setTimeoutId]   = React.useState(0);
+	const [containerStyles, setWidth] = useSpring(() => ({ to : { width : inline ? 0 : "auto" }, config : springConfig }));
+	const transitions                 = useTransition(content, (item) => item.key, {
+		from   : { opacity : 0, transform : `translateY(${direction === "down" ? "-100%" : "100%"})` },
+		enter  : { opacity : 1, transform : "translateY(0%)" },
+		leave  : { opacity : 0, transform : `translateY(${direction === "down" ? "100%" : "-100%"})` },
+		config : springConfig
+	});
+	React.useEffect(() => {
+		setTimeoutId(
+			setTimeout(() => {
+				placeholderRef.current.innerHTML = text;
+				if (inline) setWidth({ width : placeholderRef.current.offsetWidth });
+				setContent(newText(text));
+			}, delay)
 		);
-	}
+	}, [text]);
 
-	render() {
-		return this.props.inline ? (
-			<Motion style={{ width : spring(this.state.width, this.props.spring) }}>
-				{ this.renderStuff }
-			</Motion>
-		) : this.renderStuff();
-	}
-}
+	React.useEffect(() => () => clearTimeout(timeoutId), []);
 
+	return (
+		<animated.div style={ { ...containerStyles, display : inline ? "inline-block" : "block", ...style } } className={ `text-transition ${className}` }>
+			<span ref={ placeholderRef } className="text-transition_placeholder" />
+			<div className="text-transition_inner" style={ noOverflow ? { overflow : "hidden" } : {} }>
+				{
+					transitions.map(({ item, props, key }) => (
+						<animated.div key={ key } style={ props }>{ item.data }</animated.div>
+					))
+				}
+			</div>
+		</animated.div>
+	);
+};
 
 TextTransition.propTypes = {
-	text      : PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-	order     : PropTypes.number,
-	inline    : PropTypes.bool,
-	delay     : PropTypes.number,
-	className : PropTypes.string,
-	style     : PropTypes.object,
-	overflow  : PropTypes.bool,
-	spring    : PropTypes.shape({
-		stiffness : PropTypes.number,
-		damping   : PropTypes.number
-	})
+	text         : PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+	direction    : PropTypes.oneOf(["up", "down"]),
+	inline       : PropTypes.bool,
+	noOverflow   : PropTypes.bool,
+	delay        : PropTypes.number,
+	className    : PropTypes.string,
+	style        : PropTypes.object,
+	springConfig : PropTypes.any
 };
 
 TextTransition.defaultProps = {
-	order     : 0,
-	inline    : false,
-	spring    : { stiffness : 170, damping : 26 },
-	overflow  : false,
-	delay     : 0,
-	className : "",
-	style     : {}
+	direction    : "up",
+	noOverflow   : false,
+	inline       : false,
+	springConfig : config.default,
+	delay        : 0,
+	className    : "",
+	style        : {}
 };
 
 export default TextTransition;

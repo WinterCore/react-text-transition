@@ -1,15 +1,13 @@
 .text-transition
 	position relative
-	.placeholder
-		visibility hidden
-	.text-transition-inner
+	.text-transition_placeholder
+		visibility: hidden;
+	.text-transition_inner
 		display block
 		position absolute
 		top 0
 		left 0
-		height 115%
+		height 100%
 		width 100%
-		.text
-			position absolute
-			max-width 100%
-			display inline-block
+		& > div
+			position absolute 

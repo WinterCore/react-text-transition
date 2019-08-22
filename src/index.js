@@ -1,6 +1,6 @@
-import { presets }    from "react-motion";
+import { config } from "react-spring";
 
 import TextTransition from "./components/TextTransition";
 
-TextTransition.presets = presets;
-module.exports = TextTransition;
+export default TextTransition;
+export { config as presets };

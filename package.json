@@ -27,38 +27,38 @@
   },
   "homepage": "https://github.com/WinterCore/react-text-transition#readme",
   "devDependencies": {
-    "@babel/cli": "^7.1.0",
-    "@babel/core": "^7.1.0",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.2",
-    "copy-webpack-plugin": "^4.5.1",
-    "css-loader": "^0.28.11",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
-    "prop-types": "^15.6.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.8.5",
-    "react-hot-loader": "^4.3.12",
+    "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.2.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-hot-loader": "^4.12.11",
     "react-motion": "^0.5.2",
-    "style-loader": "^0.21.0",
-    "stylus": "^0.54.5",
+    "style-loader": "^1.0.0",
+    "stylus": "^0.54.6",
     "stylus-loader": "^3.0.2",
-    "webpack": "^4.6.0",
-    "webpack-build-notifier": "^0.1.29",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.7"
+    "webpack": "^4.39.2",
+    "webpack-build-notifier": "^1.1.0",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
-    "react-motion": "^0.5.2"
+    "react-spring": "^8.0.27"
   },
   "peerDependencies": {
-    "react": ">=15.0.1"
+    "react": ">=16.9.0"
   },
   "files": [
     "dist"
