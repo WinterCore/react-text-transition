@@ -50,7 +50,7 @@ const App = () => {
 | direction | String (enum) | 0 | Used to determine the direction of the transition `"up"` or `"down"` (Must be an all-lowercase string). |
 | inline | Boolean | false | Makes the wrapper inline (will auto resize based on contents). |
 | delay | Number | 0 | Delay the transition of the text (in milliseconds). |
-| springConfig | Object | { stiffness : 170, damping : 26 } | React-Motion's spring configuration. |
+| springConfig | Object | { mass: 1, tension: 170, friction: 26 } | react-spring's spring configuration. |
 | noOverflow | Boolean | false | Setting this to true will make the transitioning text appear clipped (Will simply set overflow : hidden on the wrapper). |
 | className | String | "" | Any css classes that you might want to send to the wrapper. |
 | style | Object | {} | Any styles that you might want to send to the wrapper. |
@@ -65,7 +65,7 @@ Will simply make the wrapper an inline element and animate its width based on cu
 #### delay ```Number```
 The amount of miliseconds to wait before transitioning.
 #### spring ```Object```
-react-spring's [Spring configuration](https://www.react-spring.io/docs/hooks/apis) (Refer to the configs section)
+react-spring's [Spring configuration](https://www.react-spring.io/docs/hooks/api) (Refer to the configs section)
 react-spring's spring presets are exposed as `presets`.
 ```javascript
   import TextTransition, { presets } from "react-text-transition";
