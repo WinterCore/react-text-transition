@@ -20,7 +20,7 @@
     "motion",
     "plugin"
   ],
-  "author": "WinterCore <hogobbl@gmail.com> (http://www.wintercore.me/)",
+  "author": "WinterCore <hogobbl@gmail.com> (https://www.wintercore.dev/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/WinterCore/react-text-transition/issues"
@@ -45,7 +45,6 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-hot-loader": "^4.12.11",
-    "react-motion": "^0.5.2",
     "style-loader": "^1.0.0",
     "stylus": "^0.54.6",
     "stylus-loader": "^3.0.2",
@@ -58,9 +57,10 @@
     "react-spring": "^8.0.27"
   },
   "peerDependencies": {
-    "react": ">=16.9.0"
+    "react": ">=16.8.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ]
 }
