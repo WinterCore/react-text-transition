@@ -49,7 +49,7 @@ const Demo = () => {
 				className="transition-text"
 				delay={ 100 }
 				direction={ number > oldNumber ? "up" : "down" }
-				springConfig={ presets.stiff }
+				springConfig={ { mass: 1, tension: 280, friction: 5 } }
 			/>
 		</div>
 	);
