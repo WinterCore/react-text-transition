@@ -5,9 +5,7 @@ import { useSpring, useTransition, animated, config } from "react-spring";
 
 import "./text-transition.styl";
 
-
 const newText = (text) => ({ key : `${Date.now()}`, data : text });
-
 
 const TextTransition = ({
 	text,
@@ -43,7 +41,7 @@ const TextTransition = ({
 	React.useEffect(() => () => clearTimeout(timeoutId), []);
 
 	return (
-		<animated.div style={ { ...containerStyles, whiteSpace: inline ? "nowrap" : "normal", display : inline ? "inline-block" : "block", ...style } } className={ `text-transition ${className}` }>
+		<animated.div style={ { ...containerStyles, whiteSpace : inline ? "nowrap" : "normal", display : inline ? "inline-block" : "block", ...style } } className={ `text-transition ${className}` }>
 			<span ref={ placeholderRef } className="text-transition_placeholder" />
 			<div className="text-transition_inner" style={ noOverflow ? { overflow : "hidden" } : {} }>
 				{
