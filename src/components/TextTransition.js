@@ -32,6 +32,7 @@ const TextTransition = ({
 	React.useEffect(() => {
 		setTimeoutId(
 			setTimeout(() => {
+				if (!placeholderRef.current) return;
 				placeholderRef.current.innerHTML = text;
 				if (inline) setWidth({ width : placeholderRef.current.offsetWidth });
 				setContent(newText(text));
