@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 
 import { useSpring, useTransition, animated, config } from "react-spring";
 
-import "./text-transition.styl";
-
 const newText = (text) => ({ key : `${Date.now()}`, data : text });
 
 const TextTransition = ({
@@ -41,12 +39,32 @@ const TextTransition = ({
 	React.useEffect(() => () => clearTimeout(timeoutId), []);
 
 	return (
-		<animated.div style={ { ...containerStyles, whiteSpace : inline ? "nowrap" : "normal", display : inline ? "inline-block" : "block", ...style } } className={ `text-transition ${className}` }>
-			<span ref={ placeholderRef } className="text-transition_placeholder" />
-			<div className="text-transition_inner" style={ noOverflow ? { overflow : "hidden" } : {} }>
+		<animated.div
+			className={ `text-transition ${className}` }
+			style={{
+				...containerStyles,
+				whiteSpace : inline ? "nowrap" : "normal",
+				display : inline ? "inline-block" : "block",
+				position: "relative",
+				...style
+			}}
+		>
+			<span ref={ placeholderRef } style={{ visibility: "hidden" }} className="text-transition_placeholder" />
+			<div
+				className="text-transition_inner"
+				style={{
+					overflow : noOverflow ? "hidden" : "visible",
+					display: "block",
+					position: "absolute",
+					top: 0,
+					left: 0,
+					height: "100%",
+					width: "100%",
+				}}
+			>
 				{
 					transitions.map(({ item, props, key }) => (
-						<animated.div key={ key } style={ props }>{ item.data }</animated.div>
+						<animated.div key={ key } style={ { ...props, position: "absolute" } }>{ item.data }</animated.div>
 					))
 				}
 			</div>

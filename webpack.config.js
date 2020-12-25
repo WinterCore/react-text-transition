@@ -42,17 +42,20 @@ module.exports = {
 					],
 					plugins : ["@babel/plugin-proposal-object-rest-spread"]
 				}
-			}, {
-				test    : /\.styl$/,
-				exclude : /node_modules/,
-				loader  : ["style-loader", "css-loader", "stylus-loader"]
 			}
 		]
 	},
+	resolve: {      
+        alias: {          
+            'react': path.resolve(__dirname, './node_modules/react'),
+    		'react-dom': path.resolve(__dirname, './node_modules/react-dom')
+        }  
+    },
 	output : {
 		path          : path.join(__dirname, "dist"),
 		filename      : "index.js",
 		library       : "TextTransition",
-		libraryTarget : "umd"
+		libraryTarget : "umd",
+		globalObject  : "this"
 	}
 };

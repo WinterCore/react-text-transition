@@ -3,7 +3,7 @@ const WebpackBuildNotifierPlugin = require("webpack-build-notifier");
 
 module.exports = {
 	entry   : path.resolve(__dirname, "src", "app.js"),
-	devtool : "sourcemap",
+	devtool : "source-map",
 	module  : {
 		rules : [
 			{
@@ -30,10 +30,6 @@ module.exports = {
 					],
 					plugins : ["@babel/plugin-proposal-object-rest-spread", "react-hot-loader/babel"]
 				}
-			}, {
-				test    : /\.styl$/,
-				exclude : /node_modules/,
-				loader  : ["style-loader", "css-loader", "stylus-loader"]
 			}
 		]
 	},
