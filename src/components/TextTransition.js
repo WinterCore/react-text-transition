@@ -13,7 +13,8 @@ const TextTransition = ({
 	className,
 	style,
 	noOverflow,
-	springConfig
+	springConfig,
+	decodeText
 }) => {
 	const placeholderRef              = React.useRef(null);
 	const [content, setContent]       = React.useState(() => newText(""));
@@ -64,7 +65,7 @@ const TextTransition = ({
 			>
 				{
 					transitions.map(({ item, props, key }) => (
-						<animated.div key={ key } style={ { ...props, position: "absolute" } }>{ item.data }</animated.div>
+						<animated.div key={ key } style={ { ...props, position: "absolute" } }>{decodeText ?  <span dangerouslySetInnerHTML={{__html:item.data}}  /> : item.data}</animated.div>
 					))
 				}
 			</div>
@@ -80,7 +81,8 @@ TextTransition.propTypes = {
 	delay        : PropTypes.number,
 	className    : PropTypes.string,
 	style        : PropTypes.object,
-	springConfig : PropTypes.any
+	springConfig : PropTypes.any,
+	decodeText	 : PropTypes.bool
 };
 
 TextTransition.defaultProps = {
@@ -90,7 +92,8 @@ TextTransition.defaultProps = {
 	springConfig : config.default,
 	delay        : 0,
 	className    : "",
-	style        : {}
+	style        : {},
+	decodeText	 : false 
 };
 
 export default TextTransition;
