@@ -13,17 +13,23 @@ const TextTransition = ({
 	className,
 	style,
 	noOverflow,
-	springConfig
+	springConfig,
+	immediateOnFirst
 }) => {
 	const placeholderRef              = React.useRef(null);
 	const [content, setContent]       = React.useState(() => newText(""));
 	const [timeoutId, setTimeoutId]   = React.useState(0);
+	const [isFirstRun, setIsFirstRun] = React.useState(true);
 	const [containerStyles, setWidth] = useSpring(() => ({ to : { width : inline ? 0 : "auto" }, config : springConfig }));
 	const transitions                 = useTransition(content, (item) => item.key, {
-		from   : { opacity : 0, transform : `translateY(${direction === "down" ? "-100%" : "100%"})` },
-		enter  : { opacity : 1, transform : "translateY(0%)" },
-		leave  : { opacity : 0, transform : `translateY(${direction === "down" ? "100%" : "-100%"})` },
-		config : springConfig
+		from        : { opacity : 0, transform : `translateY(${direction === "down" ? "-100%" : "100%"})` },
+		enter       : { opacity : 1, transform : "translateY(0%)" },
+		leave       : { opacity : 0, transform : `translateY(${direction === "down" ? "100%" : "-100%"})` },
+		config      : springConfig,
+		immediate   : immediateOnFirst && isFirstRun,
+		onDestroyed : () => {
+			setIsFirstRun(false);
+		}
 	});
 	React.useEffect(() => {
 		setTimeoutId(
@@ -73,24 +79,26 @@ const TextTransition = ({
 };
 
 TextTransition.propTypes = {
-	text         : PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-	direction    : PropTypes.oneOf(["up", "down"]),
-	inline       : PropTypes.bool,
-	noOverflow   : PropTypes.bool,
-	delay        : PropTypes.number,
-	className    : PropTypes.string,
-	style        : PropTypes.object,
-	springConfig : PropTypes.any
+	text             : PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+	direction        : PropTypes.oneOf(["up", "down"]),
+	inline           : PropTypes.bool,
+	noOverflow       : PropTypes.bool,
+	delay            : PropTypes.number,
+	className        : PropTypes.string,
+	style            : PropTypes.object,
+	springConfig     : PropTypes.any,
+	immediateOnFirst : PropTypes.bool
 };
 
 TextTransition.defaultProps = {
-	direction    : "up",
-	noOverflow   : false,
-	inline       : false,
-	springConfig : config.default,
-	delay        : 0,
-	className    : "",
-	style        : {}
+	direction        : "up",
+	noOverflow       : false,
+	inline           : false,
+	springConfig     : config.default,
+	delay            : 0,
+	className        : "",
+	style            : {},
+	immediateOnFirst : false
 };
 
 export default TextTransition;
