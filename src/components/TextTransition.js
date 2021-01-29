@@ -13,23 +13,27 @@ const TextTransition = ({
 	className,
 	style,
 	noOverflow,
-	springConfig,
-	immediateOnFirst
+	springConfig
 }) => {
 	const placeholderRef              = React.useRef(null);
 	const [content, setContent]       = React.useState(() => newText(""));
 	const [timeoutId, setTimeoutId]   = React.useState(0);
 	const [isFirstRun, setIsFirstRun] = React.useState(true);
-	const [containerStyles, setWidth] = useSpring(() => ({ to : { width : inline ? 0 : "auto" }, config : springConfig }));
+	const [width, setWidth]           = React.useState({ width : inline ? 0 : "auto" });
 	const transitions                 = useTransition(content, (item) => item.key, {
 		from        : { opacity : 0, transform : `translateY(${direction === "down" ? "-100%" : "100%"})` },
 		enter       : { opacity : 1, transform : "translateY(0%)" },
 		leave       : { opacity : 0, transform : `translateY(${direction === "down" ? "100%" : "-100%"})` },
 		config      : springConfig,
-		immediate   : immediateOnFirst && isFirstRun,
+		immediate   : isFirstRun,
 		onDestroyed : () => {
 			setIsFirstRun(false);
 		}
+	});
+	const { width: animatedWidth } = useSpring({
+		to        : width,
+		config    : springConfig,
+		immediate : isFirstRun
 	});
 	React.useEffect(() => {
 		setTimeoutId(
@@ -48,29 +52,29 @@ const TextTransition = ({
 		<animated.div
 			className={ `text-transition ${className}` }
 			style={{
-				...containerStyles,
+				...style,
+				width      : animatedWidth,
 				whiteSpace : inline ? "nowrap" : "normal",
-				display : inline ? "inline-block" : "block",
-				position: "relative",
-				...style
+				display    : inline ? "inline-block" : "block",
+				position   : "relative"
 			}}
 		>
-			<span ref={ placeholderRef } style={{ visibility: "hidden" }} className="text-transition_placeholder" />
+			<span ref={ placeholderRef } style={{ visibility : "hidden" }} className="text-transition_placeholder" />
 			<div
 				className="text-transition_inner"
 				style={{
 					overflow : noOverflow ? "hidden" : "visible",
-					display: "block",
-					position: "absolute",
-					top: 0,
-					left: 0,
-					height: "100%",
-					width: "100%",
+					display  : "block",
+					position : "absolute",
+					top      : 0,
+					left     : 0,
+					height   : "100%",
+					width    : "100%"
 				}}
 			>
 				{
 					transitions.map(({ item, props, key }) => (
-						<animated.div key={ key } style={ { ...props, position: "absolute" } }>{ item.data }</animated.div>
+						<animated.div key={ key } style={ { ...props, position : "absolute" } }>{ item.data }</animated.div>
 					))
 				}
 			</div>
@@ -79,26 +83,24 @@ const TextTransition = ({
 };
 
 TextTransition.propTypes = {
-	text             : PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-	direction        : PropTypes.oneOf(["up", "down"]),
-	inline           : PropTypes.bool,
-	noOverflow       : PropTypes.bool,
-	delay            : PropTypes.number,
-	className        : PropTypes.string,
-	style            : PropTypes.object,
-	springConfig     : PropTypes.any,
-	immediateOnFirst : PropTypes.bool
+	text         : PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+	direction    : PropTypes.oneOf(["up", "down"]),
+	inline       : PropTypes.bool,
+	noOverflow   : PropTypes.bool,
+	delay        : PropTypes.number,
+	className    : PropTypes.string,
+	style        : PropTypes.object,
+	springConfig : PropTypes.any
 };
 
 TextTransition.defaultProps = {
-	direction        : "up",
-	noOverflow       : false,
-	inline           : false,
-	springConfig     : config.default,
-	delay            : 0,
-	className        : "",
-	style            : {},
-	immediateOnFirst : false
+	direction    : "up",
+	noOverflow   : false,
+	inline       : false,
+	springConfig : config.default,
+	delay        : 0,
+	className    : "",
+	style        : {}
 };
 
 export default TextTransition;

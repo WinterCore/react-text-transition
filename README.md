@@ -54,7 +54,6 @@ const App = () => {
 | noOverflow | Boolean | false | Setting this to true will make the transitioning text appear clipped (Will simply set overflow : hidden on the wrapper). |
 | className | String | "" | Any css classes that you might want to send to the wrapper. |
 | style | Object | {} | Any styles that you might want to send to the wrapper. |
-| immediateOnFirst | Boolean | false | Display the text immediately on the first render |
 
 ___
 
@@ -88,9 +87,7 @@ There're 4 presets
 Any css classes that you might want to provide to the wrapper.
 #### style ```Object```
 Any css styles that you might want to provide to the wrapper.
-#### immediateOnFirst ```Object```
-Setting this to true will display the text immediately on the first render instead of playing the spring animation.
 
 ## NOTE
-Feel free to ask any questions about using this plugin.
+Feel free to ask any questions about using this component.
 This plugin requires [react](https://www.npmjs.com/package/react) +16.8
