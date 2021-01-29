@@ -6,8 +6,7 @@
   "scripts": {
     "build": "webpack --progress --mode production",
     "dev": "webpack serve --progress --mode development --hot --config demos/webpack.config.js",
-    "lint": "eslint src/ --ext .js",
-    "build:test": "tsdx build"
+    "lint": "eslint src/ --ext .js"
   },
   "repository": {
     "type": "git",
