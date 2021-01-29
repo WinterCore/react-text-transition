@@ -16,7 +16,7 @@ const TextTransition = ({
 	springConfig
 }) => {
 	const placeholderRef              = React.useRef(null);
-	const [content, setContent]       = React.useState(() => newText(""));
+	const [content, setContent]       = React.useState(() => newText(text));
 	const [timeoutId, setTimeoutId]   = React.useState(0);
 	const [isFirstRun, setIsFirstRun] = React.useState(true);
 	const [width, setWidth]           = React.useState({ width : inline ? 0 : "auto" });
