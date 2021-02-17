@@ -30,6 +30,7 @@ const App = () => {
       setIndex(index => index + 1),
       3000 // every 3 seconds
     );
+    return () => clearTimeout(intervalId);
   }, []);
 
   return (
