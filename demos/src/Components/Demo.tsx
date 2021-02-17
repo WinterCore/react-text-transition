@@ -1,5 +1,4 @@
-import React   from "react";
-import { hot } from "react-hot-loader";
+import * as React   from "react";
 
 import TextTransition, { presets } from "../../../src";
 
@@ -14,7 +13,7 @@ const WORDS = [
 	"ESLint"
 ];
 
-const Demo = () => {
+const Demo: React.FC<{}> = () => {
 	const [number, setNumber]       = React.useState(0);
 	const [oldNumber, setOldNumber] = React.useState(0);
 	const [index, setIndex]         = React.useState(0);
@@ -55,4 +54,4 @@ const Demo = () => {
 	);
 };
 
-export default hot(module)(Demo);
+export default Demo;

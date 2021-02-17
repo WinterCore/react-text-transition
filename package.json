@@ -2,11 +2,13 @@
   "name": "react-text-transition",
   "version": "1.2.1",
   "description": "A React plugin that animates your text when it changes.",
-  "main": "dist/index.js",
+  "typings": "lib/index.d.ts",
+  "main": "lib/index.js",
+  "jsnext:main": "lib-esm/index.js",
+  "module": "lib-esm/index.js",
   "scripts": {
-    "build": "webpack --progress --mode production",
-    "dev": "webpack serve --progress --mode development --hot --config demos/webpack.config.js",
-    "lint": "eslint src/ --ext .js"
+    "build": "tsc && tsc --outDir lib-esm -m es6",
+    "dev": "webpack serve --progress --mode development --config demos/webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -27,27 +29,21 @@
   },
   "homepage": "https://github.com/WinterCore/react-text-transition#readme",
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
-    "@babel/preset-env": "^7.12.11",
-    "@babel/preset-react": "^7.12.10",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^7.0.0",
-    "eslint": "^7.16.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hot-loader": "^4.13.0",
-    "webpack": "^5.11.0",
-    "webpack-build-notifier": "^2.1.1",
-    "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.1.5",
+    "webpack": "^5.22.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "react-spring": "^8.0.27"
@@ -56,7 +52,9 @@
     "react": ">=16.13.1"
   },
   "files": [
-    "dist",
-    "src"
+    "lib",
+    "lib-esm",
+    "src",
+    "README.md"
   ]
 }

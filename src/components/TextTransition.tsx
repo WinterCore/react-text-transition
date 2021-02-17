@@ -1,11 +1,13 @@
-import React     from "react";
-import PropTypes from "prop-types";
+import * as React     from "react";
+import * as PropTypes from "prop-types";
 
-import { useSpring, useTransition, animated, config } from "react-spring";
+import { useSpring, useTransition, animated, config, SpringConfig } from "react-spring";
 
-const newText = (text) => ({ key : `${Date.now()}`, data : text });
+type TextObj = { key: string, data: string };
 
-const TextTransition = ({
+const newText = (text: string): TextObj => ({ key : `${Date.now()}`, data : text });
+
+const TextTransition: React.FC<TextTransitionProps> = ({
 	text,
 	direction,
 	inline,
@@ -15,9 +17,9 @@ const TextTransition = ({
 	noOverflow,
 	springConfig
 }) => {
-	const placeholderRef              = React.useRef(null);
-	const [content, setContent]       = React.useState(() => newText(text));
-	const [timeoutId, setTimeoutId]   = React.useState(0);
+	const placeholderRef              = React.useRef<HTMLSpanElement | null>(null);
+	const [content, setContent]       = React.useState<TextObj>(() => newText(text.toString()));
+	const [timeoutId, setTimeoutId]   = React.useState<number>(0);
 	const [isFirstRun, setIsFirstRun] = React.useState(true);
 	const [width, setWidth]           = React.useState({ width : inline ? 0 : "auto" });
 	const transitions                 = useTransition(content, (item) => item.key, {
@@ -30,19 +32,19 @@ const TextTransition = ({
 			setIsFirstRun(false);
 		}
 	});
-	const { width: animatedWidth } = useSpring({
+	const animatedProps = useSpring({
 		to        : width,
 		config    : springConfig,
-		immediate : isFirstRun
+		immediate : isFirstRun,
 	});
 	React.useEffect(() => {
 		setTimeoutId(
 			setTimeout(() => {
 				if (!placeholderRef.current) return;
-				placeholderRef.current.innerHTML = text;
+				placeholderRef.current.innerHTML = text.toString();
 				if (inline) setWidth({ width : placeholderRef.current.offsetWidth });
-				setContent(newText(text));
-			}, delay)
+				setContent(newText(text.toString()));
+			}, delay) as unknown as number
 		);
 	}, [text]);
 
@@ -52,11 +54,11 @@ const TextTransition = ({
 		<animated.div
 			className={ `text-transition ${className}` }
 			style={{
-				...style,
-				width      : animatedWidth,
+				...animatedProps,
 				whiteSpace : inline ? "nowrap" : "normal",
 				display    : inline ? "inline-block" : "block",
-				position   : "relative"
+				position   : "relative",
+				...style,
 			}}
 		>
 			<span ref={ placeholderRef } style={{ visibility : "hidden" }} className="text-transition_placeholder" />
@@ -82,6 +84,17 @@ const TextTransition = ({
 	);
 };
 
+interface TextTransitionProps {
+	text          : string | number;
+	direction    ?: "up" | "down";
+	inline       ?: boolean;
+	noOverflow   ?: boolean;
+	delay        ?: number;
+	className    ?: string;
+	style        ?: React.CSSProperties;
+	springConfig ?: SpringConfig;
+}
+
 TextTransition.propTypes = {
 	text         : PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 	direction    : PropTypes.oneOf(["up", "down"]),
@@ -90,7 +103,7 @@ TextTransition.propTypes = {
 	delay        : PropTypes.number,
 	className    : PropTypes.string,
 	style        : PropTypes.object,
-	springConfig : PropTypes.any
+	springConfig : PropTypes.any,
 };
 
 TextTransition.defaultProps = {
@@ -100,7 +113,7 @@ TextTransition.defaultProps = {
 	springConfig : config.default,
 	delay        : 0,
 	className    : "",
-	style        : {}
+	style        : {},
 };
 
 export default TextTransition;
