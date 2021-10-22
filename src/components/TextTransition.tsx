@@ -41,7 +41,7 @@ const TextTransition: React.FC<TextTransitionProps> = ({
 		setTimeoutId(
 			setTimeout(() => {
 				if (!placeholderRef.current) return;
-				placeholderRef.current.innerHTML = text.toString();
+				placeholderRef.current.textContent = text.toString();
 				if (inline) setWidth({ width : placeholderRef.current.offsetWidth });
 				setContent(newText(text.toString()));
 			}, delay) as unknown as number
