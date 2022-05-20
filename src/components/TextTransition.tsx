@@ -22,29 +22,35 @@ const TextTransition: React.FC<TextTransitionProps> = ({
 	const [timeoutId, setTimeoutId]   = React.useState<number>(0);
 	const [isFirstRun, setIsFirstRun] = React.useState(true);
 	const [width, setWidth]           = React.useState({ width : inline ? 0 : "auto" });
-	const transitions                 = useTransition(content, (item) => item.key, {
+
+	const transitions                 = useTransition([content], {
 		from        : { opacity : 0, transform : `translateY(${direction === "down" ? "-100%" : "100%"})` },
 		enter       : { opacity : 1, transform : "translateY(0%)" },
 		leave       : { opacity : 0, transform : `translateY(${direction === "down" ? "100%" : "-100%"})` },
+        keys        : item => item.key,
 		config      : springConfig,
 		immediate   : isFirstRun,
 		onDestroyed : () => {
 			setIsFirstRun(false);
 		}
 	});
+
 	const animatedProps = useSpring({
 		to        : width,
 		config    : springConfig,
 		immediate : isFirstRun,
 	});
+
 	React.useEffect(() => {
 		setTimeoutId(
-			setTimeout(() => {
+			window.setTimeout(() => {
 				if (!placeholderRef.current) return;
 				placeholderRef.current.innerHTML = text.toString();
+
 				if (inline) setWidth({ width : placeholderRef.current.offsetWidth });
 				setContent(newText(text.toString()));
-			}, delay) as unknown as number
+
+			}, delay)
 		);
 	}, [text]);
 
@@ -74,11 +80,9 @@ const TextTransition: React.FC<TextTransitionProps> = ({
 					width    : "100%"
 				}}
 			>
-				{
-					transitions.map(({ item, props, key }) => (
-						<animated.div key={ key } style={ { ...props, position : "absolute" } }>{ item.data }</animated.div>
-					))
-				}
+				{transitions((styles, item) => (
+                    <animated.div style={{ ...styles, position : "absolute" }}>{item.data}</animated.div>
+                ))}
 			</div>
 		</animated.div>
 	);

@@ -1,17 +1,24 @@
 {
     "compilerOptions": {
-        "outDir"                      : "./lib",
-        "sourceMap"                   : true,
-        "strict"                      : true,
-        "noImplicitAny"               : true,
-        "strictNullChecks"            : true,
-        "removeComments"              : true,
+        "outDir": "./lib",
+        "sourceMap": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "removeComments": true,
         "allowSyntheticDefaultImports": true,
-        "declaration"                 : true,
-        "module"                      : "commonjs",
-        "moduleResolution"            : "node",
-        "target"                      : "es5",
-        "jsx"                         : "react"
+        "declaration": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "isolatedModules": true,
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true,
+        "strictPropertyInitialization": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "target": "es5",
+        "jsx": "react"
     },
     "include": [
         "src"
