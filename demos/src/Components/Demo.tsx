@@ -1,4 +1,4 @@
-import * as React   from "react";
+import React from "react";
 
 import TextTransition, { presets } from "../../../src";
 
@@ -13,7 +13,7 @@ const WORDS = [
 	"ESLint"
 ];
 
-const Demo: React.FC<{}> = () => {
+const Demo: React.FC = () => {
 	const [number, setNumber]       = React.useState(0);
 	const [oldNumber, setOldNumber] = React.useState(0);
 	const [index, setIndex]         = React.useState(0);
@@ -34,22 +34,24 @@ const Demo: React.FC<{}> = () => {
 			<div>
 				<TextTransition
 					inline
-					text={ WORDS[index % WORDS.length] }
 					className="transition-text"
-					springConfig={ presets.wobbly }
-				/>
+					springConfig={presets.wobbly}
+				>
+                    {WORDS[index % WORDS.length]}
+                </TextTransition>
 				&nbsp;is awesome
 			</div>
 			<p />
 			<p />
 			<TextTransition
 				inline
-				text={ number }
 				className="transition-text"
-				delay={ 100 }
-				direction={ number > oldNumber ? "up" : "down" }
-				springConfig={ { mass: 1, tension: 280, friction: 5 } }
-			/>
+				delay={100}
+				direction={number > oldNumber ? "up" : "down"}
+				springConfig={{ mass: 1, tension: 280, friction: 5 }}
+			>
+                {number}
+            </TextTransition>
 		</div>
 	);
 };

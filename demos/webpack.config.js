@@ -13,7 +13,6 @@ module.exports = {
                     options : {
                         context                 : path.resolve(__dirname, ".."),
                         onlyCompileBundledFiles : true,
-                        configFile              : path.resolve(__dirname, "tsconfig.json")
                     }
                 }]
             },

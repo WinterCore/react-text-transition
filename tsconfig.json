@@ -12,6 +12,7 @@
         "noImplicitThis": true,
         "alwaysStrict": true,
         "isolatedModules": true,
+        "esModuleInterop": true,
         "strictBindCallApply": true,
         "strictFunctionTypes": true,
         "strictPropertyInitialization": true,
