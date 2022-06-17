@@ -70,10 +70,9 @@ react-spring's spring presets are exposed as `presets`.
   import TextTransition, { presets } from "react-text-transition";
 
   // in your render method
-  <TextTransition
-    text={ this.state.text }
-    springConfig={ presets.wobbly }
-  />
+  <TextTransition springConfig={presets.wobbly}>
+    {this.state.text}
+  </TextTransition>
 ```
 There're 4 presets
 * ```default``` The default.
