@@ -35,10 +35,9 @@ const App = () => {
 
   return (
     <h1>
-      <TextTransition
-        text={ TEXTS[index % TEXTS.length] }
-        springConfig={ presets.wobbly }
-      />
+      <TextTransition springConfig={presets.wobbly}>
+        {TEXTS[index % TEXTS.length}
+      </TextTransition>
     </h1>
   );
 };
@@ -54,13 +53,12 @@ const App = () => {
 | springConfig | Object | { mass: 1, tension: 170, friction: 26 } | react-spring's spring configuration. |
 | noOverflow | Boolean | false | Setting this to true will make the transitioning text appear clipped (Will simply set overflow : hidden on the wrapper). |
 | className | String | "" | Any css classes that you might want to send to the wrapper. |
-| style | Object | {} | Any styles that you might want to send to the wrapper. |
+| style | React.CSSProperties | {} | Any styles that you might want to send to the wrapper. |
+| children | React.ReactNode | REQUIRED | The react node to be animated |
 
 ___
 
 ### Detailed Props
-#### text ```String```
-Changing this prop triggers the transition.
 #### inline ```Boolean```
 Will simply make the wrapper an inline element and animate its width based on currently showing text, this is useful if you want to show some other static text on the same line.
 #### delay ```Number```
@@ -86,7 +84,7 @@ There're 4 presets
 * ```molasses```
 #### className ```String```
 Any css classes that you might want to provide to the wrapper.
-#### style ```Object```
+#### style ```React.CSSProperties```
 Any css styles that you might want to provide to the wrapper.
 
 ## NOTE
