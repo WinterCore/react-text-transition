@@ -5,11 +5,12 @@ import {useSpring, useTransition, animated, config, SpringConfig} from "react-sp
 
 const TextTransition: React.FC<TextTransitionProps> = (props) => {
     const {
-        direction,
-        inline,
+        direction = "up",
+        inline = false,
+        springConfig = config.default,
+		delay = 0,
         className,
         style,
-        springConfig,
         children,
     } = props;
 
@@ -21,6 +22,7 @@ const TextTransition: React.FC<TextTransitionProps> = (props) => {
 		leave: { opacity : 0, transform : `translateY(${direction === "down" ? "100%" : "-100%"})`, position: "absolute" },
 		config: springConfig,
         immediate: initialRun.current,
+		delay: ! initialRun.current ? delay : undefined,
 	});
 
     const [width, setWidth] = React.useState<number | string>("auto");
@@ -45,6 +47,7 @@ const TextTransition: React.FC<TextTransitionProps> = (props) => {
 		to: { width },
 		config: springConfig,
         immediate: initialRun.current,
+		delay,
     });
 
 	return (
@@ -52,8 +55,8 @@ const TextTransition: React.FC<TextTransitionProps> = (props) => {
 			className={`text-transition ${className}`}
 			style={{
                 ...widthTransition,
-				whiteSpace : inline ? "nowrap" : "normal",
-				display    : inline ? "inline-flex" : "flex",
+				whiteSpace: inline ? "nowrap" : "normal",
+				display: inline ? "inline-flex" : "flex",
 				...style,
 			}}
 		>
@@ -69,7 +72,6 @@ const TextTransition: React.FC<TextTransitionProps> = (props) => {
 interface TextTransitionProps {
 	readonly direction?: "up" | "down";
 	readonly inline?: boolean;
-	readonly noOverflow?: boolean;
 	readonly delay?: number;
 	readonly springConfig?: SpringConfig;
 	readonly className?: string;
@@ -80,21 +82,10 @@ interface TextTransitionProps {
 TextTransition.propTypes = {
 	direction: PropTypes.oneOf(["up", "down"]),
 	inline: PropTypes.bool,
-	noOverflow: PropTypes.bool,
 	delay: PropTypes.number,
 	className: PropTypes.string,
 	style: PropTypes.object,
 	springConfig: PropTypes.any,
-};
-
-TextTransition.defaultProps = {
-	direction: "up",
-	noOverflow: false,
-	inline: false,
-	springConfig: config.default,
-	delay: 0,
-	className: "",
-	style: {},
 };
 
 export default TextTransition;

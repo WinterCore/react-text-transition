@@ -51,7 +51,6 @@ const App = () => {
 | inline | Boolean | false | Makes the wrapper inline (will auto resize based on contents). |
 | delay | Number | 0 | Delay the transition of the text (in milliseconds). |
 | springConfig | Object | { mass: 1, tension: 170, friction: 26 } | react-spring's spring configuration. |
-| noOverflow | Boolean | false | Setting this to true will make the transitioning text appear clipped (Will simply set overflow : hidden on the wrapper). |
 | className | String | "" | Any css classes that you might want to send to the wrapper. |
 | style | React.CSSProperties | {} | Any styles that you might want to send to the wrapper. |
 | children | React.ReactNode | REQUIRED | The react node to be animated |

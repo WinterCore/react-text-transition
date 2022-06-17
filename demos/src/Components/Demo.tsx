@@ -46,7 +46,7 @@ const Demo: React.FC = () => {
 			<TextTransition
 				inline
 				className="transition-text"
-				delay={100}
+				delay={200}
 				direction={number > oldNumber ? "up" : "down"}
 				springConfig={{ mass: 1, tension: 280, friction: 5 }}
 			>
