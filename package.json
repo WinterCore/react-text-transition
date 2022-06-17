@@ -1,6 +1,6 @@
 {
   "name": "react-text-transition",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A React plugin that animates your text when it changes.",
   "typings": "lib/index.d.ts",
   "main": "lib/index.js",
