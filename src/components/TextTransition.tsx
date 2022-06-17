@@ -25,39 +25,40 @@ const TextTransition: React.FC<TextTransitionProps> = (props) => {
 		delay: ! initialRun.current ? delay : undefined,
 	});
 
-    const [width, setWidth] = React.useState<number | string>("auto");
+    const [width, setWidth] = React.useState<number>(0);
     const currentRef = React.useRef<HTMLDivElement>(null);
+	const heightRef = React.useRef<number | string>("auto");
 
     React.useEffect(() => {
         initialRun.current = false;
-    }, []);
 
-    React.useEffect(() => {
         const elem = currentRef.current;
 
         if (! elem) {
             return;
         }
         
-        const { width } = elem.getBoundingClientRect();
+        const { width, height } = elem.getBoundingClientRect();
         setWidth(width);
+		heightRef.current = height;
     }, [children, setWidth, currentRef]);
 
     const widthTransition = useSpring({
 		to: { width },
 		config: springConfig,
         immediate: initialRun.current,
-		delay,
-    });
+		delay: ! initialRun.current ? delay : undefined,
+	});
 
 	return (
 		<animated.div
 			className={`text-transition ${className}`}
 			style={{
-                ...widthTransition,
+                ...(inline && ! initialRun.current ? widthTransition : undefined),
+				...style,
 				whiteSpace: inline ? "nowrap" : "normal",
 				display: inline ? "inline-flex" : "flex",
-				...style,
+				height: heightRef.current,
 			}}
 		>
             {transitions((styles, item) =>
