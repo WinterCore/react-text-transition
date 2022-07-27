@@ -36,7 +36,7 @@ const App = () => {
   return (
     <h1>
       <TextTransition springConfig={presets.wobbly}>
-        {TEXTS[index % TEXTS.length}
+        {TEXTS[index % TEXTS.length]}
       </TextTransition>
     </h1>
   );
