@@ -35,6 +35,7 @@ const Demo: React.FC = () => {
 				<TextTransition
 					inline
 					className="transition-text"
+					colors={['#efdd43', '#e80c0c', '#1c5ce0', '#cd2af1', '#57c518']}
 					springConfig={presets.wobbly}
 				>
                     {WORDS[index % WORDS.length]}

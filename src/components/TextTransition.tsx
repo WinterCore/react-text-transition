@@ -12,6 +12,7 @@ const TextTransition: React.FC<TextTransitionProps> = (props) => {
         className,
         style,
         children,
+		colors = ['#000']
     } = props;
 
     const initialRun = React.useRef(true);
@@ -37,7 +38,7 @@ const TextTransition: React.FC<TextTransitionProps> = (props) => {
         if (! elem) {
             return;
         }
-        
+
         const { width, height } = elem.getBoundingClientRect();
         setWidth(width);
 		heightRef.current = height;
@@ -59,6 +60,7 @@ const TextTransition: React.FC<TextTransitionProps> = (props) => {
 				whiteSpace: inline ? "nowrap" : "normal",
 				display: inline ? "inline-flex" : "flex",
 				height: heightRef.current,
+				color: colors[Math.floor(Math.random() * colors.length)]
 			}}
 		>
             {transitions((styles, item) =>
@@ -78,6 +80,7 @@ interface TextTransitionProps {
 	readonly className?: string;
 	readonly style?: React.CSSProperties;
     readonly children: React.ReactNode;
+	readonly colors?: Array<any>;
 }
 
 TextTransition.propTypes = {
