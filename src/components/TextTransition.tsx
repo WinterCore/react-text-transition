@@ -77,7 +77,7 @@ interface TextTransitionProps {
 	readonly springConfig?: SpringConfig;
 	readonly className?: string;
 	readonly style?: React.CSSProperties;
-    readonly children: React.ReactNode;
+    	readonly children: React.ReactNode;
 }
 
 TextTransition.propTypes = {
