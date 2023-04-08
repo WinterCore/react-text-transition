@@ -4,11 +4,11 @@ import type { CSSProperties, PropsWithChildren } from 'react';
 import { useSpring, useTransition, animated, config, SpringConfig } from '@react-spring/web';
 
 export interface TextTransitionProps {
+  className?: string;
+  delay?: number;
   direction?: 'up' | 'down';
   inline?: boolean;
   springConfig?: SpringConfig;
-  delay?: number;
-  className?: string;
   style?: CSSProperties;
   translateValue?: string;
 }
