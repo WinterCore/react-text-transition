@@ -4,7 +4,7 @@
 
 ![text-transition](https://raw.githubusercontent.com/WinterCore/react-text-transition/master/example-gifs/example.gif)
 
-[![Edit r03264p26n](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/r03264p26n?view=preview)
+[![Edit r03264p26n](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-text-transition-ts-6wp1s7?file=/src/components/App.tsx)
 
 ## Installation
 
