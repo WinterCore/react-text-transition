@@ -81,7 +81,7 @@ import TextTransition, { presets } from 'react-text-transition';
 <TextTransition springConfig={presets.wobbly}>{this.state.text}</TextTransition>;
 ```
 
-There're 4 presets
+You have the following presets
 
 - `default` The default.
 - `gentle`
