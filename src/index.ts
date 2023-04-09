@@ -1,6 +1,9 @@
-import { config } from "react-spring";
+import { config } from "@react-spring/web";
 
-import TextTransition from "./components/TextTransition";
+import TextTransition, {
+  TextTransitionProps,
+} from "./components/TextTransition";
 
-export default TextTransition;
 export { config as presets };
+export type { TextTransitionProps };
+export default TextTransition;
