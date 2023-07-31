@@ -1,13 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import type { CSSProperties, PropsWithChildren } from 'react';
 
-import { useSpring, useTransition, animated, config, SpringConfig } from '@react-spring/web';
+import { SpringConfig, animated, config, useSpring, useTransition } from '@react-spring/web';
+import { useDebouncedCallback } from 'use-debounce';
 
 export interface TextTransitionProps {
   className?: string;
   delay?: number;
   direction?: 'up' | 'down';
   inline?: boolean;
+  resizeDebounceMs?: number;
   springConfig?: SpringConfig;
   style?: CSSProperties;
   translateValue?: string;
@@ -17,6 +19,7 @@ function TextTransition(props: PropsWithChildren<TextTransitionProps>) {
   const {
     direction = 'up',
     inline = false,
+    resizeDebounceMs = 50,
     springConfig = config.default,
     delay = 0,
     className,
@@ -46,8 +49,7 @@ function TextTransition(props: PropsWithChildren<TextTransitionProps>) {
   const currentRef = useRef<HTMLDivElement>(null);
   const heightRef = useRef<number | string>('auto');
 
-  useEffect(() => {
-    initialRun.current = false;
+  const onResize = useCallback(() => {
     const element = currentRef.current;
 
     // If element doesn't exist, then do nothing
@@ -57,7 +59,20 @@ function TextTransition(props: PropsWithChildren<TextTransitionProps>) {
 
     setWidth(width);
     heightRef.current = height;
-  }, [children, setWidth, currentRef]);
+  }, [setWidth, currentRef]);
+
+  useEffect(() => {
+    initialRun.current = false;
+    onResize();
+  }, [children, onResize]);
+
+  const resizeHandler = useDebouncedCallback(onResize, resizeDebounceMs);
+
+  useEffect(() => {
+    window.addEventListener('resize', resizeHandler);
+
+    return () => window.removeEventListener('resize', resizeHandler);
+  }, [resizeHandler]);
 
   const widthTransition = useSpring({
     to: { width },
