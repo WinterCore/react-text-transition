@@ -46,7 +46,8 @@
     "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
-    "@react-spring/web": "^9.7.2"
+    "@react-spring/web": "^9.7.2",
+    "use-debounce": "^9.0.4"
   },
   "peerDependencies": {
     "react": ">=18.0.0"
