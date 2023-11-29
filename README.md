@@ -71,7 +71,7 @@ The amount of miliseconds to wait before transitioning.
 
 #### spring `Object`
 
-react-spring's [Spring configuration](https://www.react-spring.io/docs/hooks/api) (Refer to the
+react-spring's [Spring configuration](https://www.react-spring.dev/docs/advanced/config#presets) (Refer to the
 configs section) react-spring's spring presets are exposed as `presets`.
 
 ```javascript
